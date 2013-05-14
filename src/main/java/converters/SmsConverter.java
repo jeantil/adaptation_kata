@@ -3,14 +3,11 @@ package converters;
 import persistent.SmsEventEntity;
 import persistent.UserEntity;
 
-public class SmsConverter {
+public class SmsConverter extends EventConverter{
     public SmsEventEntity toEntity(api.event.domain.SmsEvent model, UserEntity user) {
-        final SmsEventEntity sms = new SmsEventEntity();
-        sms.setId(model.getId());
-        sms.setUserId(user.getUserId());
+        final SmsEventEntity sms = super.toEntity(new SmsEventEntity(), model, user);
         sms.setFrom(model.getFrom());
         sms.setText(model.getText());
-
         return sms;
     }
 }
