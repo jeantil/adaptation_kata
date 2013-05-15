@@ -4,7 +4,7 @@ import static builders.model.SmsEventModelTestBuilder.sms;
 import static org.fest.assertions.api.Assertions.assertThat;
 import java.util.UUID;
 import org.junit.Test;
-import api.event.domain.SmsEvent;
+import api.domain.SmsEvent;
 import builders.persistent.UserEntityTestBuilder;
 import me.prettyprint.cassandra.utils.TimeUUIDUtils;
 import persistent.SmsEventEntity;

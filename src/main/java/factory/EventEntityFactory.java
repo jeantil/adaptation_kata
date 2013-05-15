@@ -9,6 +9,10 @@ import api.domain.FileEvent;
 import api.domain.SmsEvent;
 import api.domain.TextEvent;
 import api.domain.XmppEvent;
+import converters.AudioConverter;
+import converters.FileConverter;
+import converters.SmsConverter;
+import converters.TextConverter;
 import persistent.AudioEventEntity;
 import persistent.EventEntity;
 import persistent.FileEventEntity;
@@ -24,75 +28,25 @@ public class EventEntityFactory implements EventVisitor<EventEntity, UserEntity>
     @Autowired
     private URLService urlService;
 
-    private void mapBaseProperties(EventEntity entity, UserEntity user, Event model) {
-
-        entity.setId(model.getId());
-        entity.setUserId(user.getUserId());
-    }
-
-    private void mapXmppProperties(XmppEventEntity entity, UserEntity user, XmppEvent model) {
-        this.mapBaseProperties(entity, user, model);
-        entity.setXmppId(model.getXmppId());
-    }
-
-    private void mapAudioProperties(AudioEventEntity entity, UserEntity user, AudioEvent model) {
-        this.mapFileProperties(entity, user, model);
-
-        this.fillAudioDuration(entity, model);
-    }
-
-    private void mapFileProperties(FileEventEntity entity, UserEntity user, FileEvent model) {
-        this.mapXmppProperties(entity, user, model);
-
-        entity.setFilename(urlService.fromUrl(model.getUrl()));
-    }
-
-
     @Override
     public FileEventEntity visit(FileEvent model, UserEntity user) {
-        FileEventEntity entity = new FileEventEntity();
-
-        this.mapFileProperties(entity, user, model);
-
-        return entity;
+      return new FileConverter(urlService).toEntity(model,user);
     }
 
     @Override
     public AudioEventEntity visit(AudioEvent model, UserEntity user) {
-        AudioEventEntity entity = new AudioEventEntity();
-
-        this.mapAudioProperties(entity, user, model);
-
-        return entity;
+        return new AudioConverter(urlService).toEntity(model,user);
     }
 
     @Override
     public SmsEventEntity visit(SmsEvent model, UserEntity user) {
-        SmsEventEntity entity = new SmsEventEntity();
-
-        this.mapBaseProperties(entity, user, model);
-
-        entity.setFrom(model.getFrom());
-        entity.setText(model.getText());
-
-        return entity;
-
+        return new SmsConverter().toEntity(model, user);
     }
 
 
     @Override
     public TextEventEntity visit(TextEvent model, UserEntity user) {
-        TextEventEntity entity = new TextEventEntity();
-    
-        this.mapXmppProperties(entity, user, model);
-        entity.setXmppId(model.getXmppId());
-        entity.setText(model.getText());
-    
-        return entity;
-    }
-
-    private void fillAudioDuration(AudioEventEntity entity, AudioEvent model) {
-        entity.setDuration(model.getDuration());
+        return new TextConverter().toEntity(model,user);
     }
 
 }

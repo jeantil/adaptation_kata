@@ -1,6 +1,6 @@
 package converters;
 
-import api.event.domain.XmppEvent;
+import api.domain.XmppEvent;
 import persistent.UserEntity;
 import persistent.XmppEventEntity;
 

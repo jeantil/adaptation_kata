@@ -1,6 +1,6 @@
 package converters;
 
-import api.event.domain.Event;
+import api.domain.Event;
 import persistent.EventEntity;
 import persistent.UserEntity;
 

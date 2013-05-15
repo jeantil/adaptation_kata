@@ -1,13 +1,13 @@
 package converters;
 
-import api.event.domain.FileEvent;
+import api.domain.FileEvent;
 import persistent.FileEventEntity;
 import persistent.UserEntity;
-import services.CryptoService;
+import services.URLService;
 
 public class FileConverter extends GenericFileConverter<FileEventEntity,FileEvent> {
 
-    public FileConverter(CryptoService cryptoService) {
+    public FileConverter(URLService cryptoService) {
         super(cryptoService);
     }
 

@@ -1,6 +1,6 @@
 package converters;
 
-import api.event.domain.TextEvent;
+import api.domain.TextEvent;
 import persistent.TextEventEntity;
 import persistent.UserEntity;
 

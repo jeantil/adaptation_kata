@@ -1,22 +1,22 @@
 package converters;
 
-import api.event.domain.FileEvent;
+import api.domain.FileEvent;
 import persistent.FileEventEntity;
 import persistent.UserEntity;
-import services.CryptoService;
+import services.URLService;
 
 public abstract class GenericFileConverter<T extends FileEventEntity,U extends FileEvent> extends XmppEventConverter<T,
         U> {
-    private CryptoService cryptoService;
+    private URLService urlService;
 
-    public GenericFileConverter(CryptoService cryptoService) {
-        this.cryptoService = cryptoService;
+    public GenericFileConverter(URLService urlService) {
+        this.urlService = urlService;
     }
 
     @Override
     protected T toEntity(T event, U model, UserEntity user) {
         final T file = super.toEntity(event, model, user);
-        file.setFilename(cryptoService.cryptFilename(model.getFilename()));
+        file.setFilename(urlService.fromUrl(model.getUrl()));
         return file;
     }
 }

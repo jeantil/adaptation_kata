@@ -19,7 +19,7 @@ public class TextConverterTest {
 
         UserEntity userEntity = new UserEntityTestBuilder().userId(userId).build();
 
-        api.event.domain.TextEvent model = TextEventModelTestBuilder.text() //
+        api.domain.TextEvent model = TextEventModelTestBuilder.text() //
                 .serverId(id)
                 .xmppId(xmppId) //
                 .text("pouet") //
