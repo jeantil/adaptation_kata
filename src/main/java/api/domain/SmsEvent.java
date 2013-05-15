@@ -33,9 +33,4 @@ public class SmsEvent extends Event {
     public void setFrom(String from) {
         this.from = from;
     }
-
-    @Override
-    public <E, U> E accept(EventVisitor<E, U> visitor, U user) {
-        return visitor.visit(this, user);
-    }
 }

@@ -36,7 +36,6 @@ public class EventDomainFactory {
     }
 
     public EventEntity fromModel(Event model, UserEntity user) {
-
-        return model.accept(entityFactory, user);
+        return  entityFactory.toEntity(model,user);
     }
 }

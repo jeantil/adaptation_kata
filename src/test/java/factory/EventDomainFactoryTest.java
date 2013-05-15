@@ -45,7 +45,7 @@ public class EventDomainFactoryTest {
         SmsEventEntity built = SmsEventEntityTestBuilder.sms().build();
         UserEntity user = UserEntityTestBuilder.userWithRandomId().build();
 
-        when(entityFactory.visit(sms, user)).thenReturn(built);
+        when(entityFactory.toEntity(sms, user)).thenReturn(built);
 
         //TODO : We would like to be able to assign to an EventEntitySms
         //final EventEntitySms eventEntity = factory.fromModel(sms, user);

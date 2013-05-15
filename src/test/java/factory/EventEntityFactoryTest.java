@@ -49,7 +49,7 @@ public class EventEntityFactoryTest {
                 .serverId(id)
                 .build();
 
-        EventEntity built = model.accept(factory, userEntity);
+        EventEntity built = factory.toEntity(model, userEntity);
 
         assertThat(built.getId()).isEqualTo(id);
         assertThat(built.getUserId()).isEqualTo(userId);
@@ -70,7 +70,7 @@ public class EventEntityFactoryTest {
         when(urlService.fromUrl(url)).thenReturn(filename);
 
         //When
-        EventEntity entity = model.accept(factory, userEntity);
+        EventEntity entity = factory.toEntity(model, userEntity);
 
         //Then
         assertThat(entity).isInstanceOf(AudioEventEntity.class);
@@ -95,7 +95,7 @@ public class EventEntityFactoryTest {
         when(urlService.fromUrl(url)).thenReturn(filename);
 
         //When
-        final EventEntity entity = model.accept(factory, userEntity);
+        final EventEntity entity = factory.toEntity(model, userEntity);
 
         //Then
         assertThat(entity).isInstanceOf(FileEventEntity.class);
@@ -113,7 +113,7 @@ public class EventEntityFactoryTest {
                 .from(interlocutorMsisdn) //
                 .text(text).build();
 
-        EventEntity build = model.accept(factory, userEntity);
+        EventEntity build = factory.toEntity(model, userEntity);
 
         assertThat(build).isInstanceOf(SmsEventEntity.class);
 
@@ -132,7 +132,7 @@ public class EventEntityFactoryTest {
                 .text("pouet") //
                 .build();
 
-        EventEntity build = model.accept(factory, userEntity);
+        EventEntity build = factory.toEntity(model, userEntity);
 
         assertThat(build).isInstanceOf(TextEventEntity.class);
 

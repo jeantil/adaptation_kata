@@ -21,9 +21,4 @@ public class TextEvent extends XmppEvent {
     public void setText(String text) {
         this.text = text;
     }
-
-    @Override
-    public <E, U> E accept(EventVisitor<E, U> visitor, U user) {
-        return visitor.visit(this, user);
-    }
 }

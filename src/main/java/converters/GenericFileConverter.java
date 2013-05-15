@@ -5,9 +5,9 @@ import persistent.FileEventEntity;
 import persistent.UserEntity;
 import services.URLService;
 
-public abstract class GenericFileConverter<T extends FileEventEntity,U extends FileEvent> extends XmppEventConverter<T,
+abstract class GenericFileConverter<T extends FileEventEntity,U extends FileEvent> extends XmppEventConverter<T,
         U> {
-    private URLService urlService;
+    private final URLService urlService;
 
     public GenericFileConverter(URLService urlService) {
         this.urlService = urlService;

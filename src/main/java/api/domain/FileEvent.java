@@ -5,9 +5,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.codehaus.jackson.annotate.JsonTypeName;
-import factory.EventEntityFactory;
-import persistent.EventEntity;
-import persistent.UserEntity;
 
 @XmlRootElement(name = "event-file")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -24,10 +21,5 @@ public class FileEvent extends XmppEvent {
 
     public void setUrl(URL url) {
         this.url = url;
-    }
-
-    @Override
-    public <E, U> E accept(EventVisitor<E, U> visitor, U user) {
-        return visitor.visit(this, user);
     }
 }

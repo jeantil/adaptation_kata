@@ -1,7 +1,6 @@
 package builders.persistent;
 
 import persistent.AudioEventEntity;
-import persistent.FileEventEntity;
 
 public class AudioEventEntityTestBuilder extends XmppEventEntityTestBuilder<AudioEventEntityTestBuilder,
         AudioEventEntity> {

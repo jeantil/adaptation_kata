@@ -15,7 +15,6 @@ import persistent.FileEventEntity;
 import persistent.SmsEventEntity;
 import persistent.TextEventEntity;
 import persistent.XmppEventEntity;
-import services.CryptoService;
 import services.URLService;
 
 @Component
