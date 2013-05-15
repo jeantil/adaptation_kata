@@ -5,18 +5,14 @@ import persistent.FileEventEntity;
 import persistent.UserEntity;
 import services.CryptoService;
 
-public class FileConverter extends XmppEventConverter<FileEventEntity,FileEvent> {
-    private CryptoService cryptoService;
+public class FileConverter extends GenericFileConverter<FileEventEntity,FileEvent> {
 
     public FileConverter(CryptoService cryptoService) {
-        this.cryptoService = cryptoService;
+        super(cryptoService);
     }
 
-    public FileEventEntity toEntity(FileEvent model, UserEntity userEntity) {
-        final FileEventEntity file = super.toEntity(new FileEventEntity(), model, userEntity);
-
-        file.setFilename(model.getFilename());
-
-        return file;
+    @Override
+    public FileEventEntity toEntity(FileEvent model, UserEntity user) {
+        return super.toEntity(new FileEventEntity(), model,user);
     }
 }

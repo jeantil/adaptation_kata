@@ -4,7 +4,7 @@ import api.event.domain.XmppEvent;
 import persistent.UserEntity;
 import persistent.XmppEventEntity;
 
-public class XmppEventConverter<T extends XmppEventEntity, U extends XmppEvent> extends EventConverter<T, U> {
+public abstract class XmppEventConverter<T extends XmppEventEntity, U extends XmppEvent> extends EventConverter<T, U> {
 
     @Override
     protected T toEntity(T event, U model, UserEntity user) {
