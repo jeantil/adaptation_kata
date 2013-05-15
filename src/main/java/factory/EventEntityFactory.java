@@ -28,6 +28,11 @@ public class EventEntityFactory implements EventVisitor<EventEntity, UserEntity>
     @Autowired
     private URLService urlService;
 
+    @Autowired
+    public EventEntityFactory(URLService urlService) {
+        this.urlService = urlService;
+    }
+
     @Override
     public FileEventEntity visit(FileEvent model, UserEntity user) {
       return new FileConverter(urlService).toEntity(model,user);
