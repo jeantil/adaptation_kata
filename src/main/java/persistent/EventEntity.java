@@ -5,8 +5,6 @@ import com.google.common.base.Objects;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
-import api.domain.Event;
-import factory.EventModelFactory;
 import me.prettyprint.cassandra.utils.TimeUUIDUtils;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
@@ -53,7 +51,4 @@ public abstract class EventEntity {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
-
-    public abstract Event accept(EventModelFactory visitor);
-
 }

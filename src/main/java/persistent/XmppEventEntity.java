@@ -1,8 +1,5 @@
 package persistent;
 
-import api.domain.Event;
-import factory.EventModelFactory;
-
 public abstract class XmppEventEntity extends EventEntity{
 
     private String xmppId;
@@ -19,7 +16,5 @@ public abstract class XmppEventEntity extends EventEntity{
     public EventType getType() {
         return EventType.sms;
     }
-
-    public abstract Event accept(EventModelFactory visitor);
 
 }

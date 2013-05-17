@@ -1,8 +1,7 @@
 package persistent;
 
 import org.codehaus.jackson.annotate.JsonTypeName;
-import api.domain.FileEvent;
-import factory.EventModelFactory;
+
 
 @JsonTypeName(AudioEventEntity.EVENT_TYPE)
 public class AudioEventEntity extends FileEventEntity {
@@ -23,9 +22,4 @@ public class AudioEventEntity extends FileEventEntity {
         return EventType.audio;
     }
 
-    @Override
-    public FileEvent accept(EventModelFactory visitor) {
-        //TODO we want to get rid of the cyclic dependency between the factory and the model
-        return visitor.fromEntity(this);
-    }
 }

@@ -24,7 +24,7 @@ public class EventDomainFactory {
 
     public Event fromEntity(EventEntity entity) {
 
-        return entity.accept(modelFactory);
+        return modelFactory.fromEntity(entity);
     }
 
     public Collection<Event> fromEntities(Collection<EventEntity> entities) {
