@@ -1,6 +1,5 @@
 package converters;
 
-import static builders.model.FileEventModelTestBuilder.file;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -9,6 +8,8 @@ import java.net.URL;
 import java.util.UUID;
 import org.junit.Test;
 import api.domain.FileEvent;
+import builders.model.FileEventModelTestBuilder;
+import builders.persistent.FileEventEntityTestBuilder;
 import builders.persistent.UserEntityTestBuilder;
 import me.prettyprint.cassandra.utils.TimeUUIDUtils;
 import persistent.FileEventEntity;
@@ -31,7 +32,7 @@ public class FileConverterTest {
         final URLService urlService = mock(URLService.class);
         when(urlService.fromUrl(url)).thenReturn(encryptedFilename);
 
-        FileEvent model = file()
+        FileEvent model = FileEventModelTestBuilder.file()
                 .serverId(id)
                 .xmppId(xmppId)
                 .url(url)
@@ -45,6 +46,34 @@ public class FileConverterTest {
         assertThat(file.getUserId()).isEqualTo(userId);
         assertThat(file.getXmppId()).isEqualTo(xmppId);
         assertThat(file.getFilename()).isEqualTo(encryptedFilename);
+    }
+    @Test
+    public void should_convert_entity_to_model() throws MalformedURLException {
+        // Given
+        UUID id = TimeUUIDUtils.getUniqueTimeUUIDinMillis();
+        Long userId = 12345L;
+        URL url = new URL("file://url");
+        String encryptedFilename = "encryptedFilename";
+        String xmppId = "1654";
+
+        UserEntity userEntity = new UserEntityTestBuilder().userId(userId).build();
+
+        final URLService cryptoService = mock(URLService.class);
+        when(cryptoService.toUrl(encryptedFilename)).thenReturn(url);
+
+        FileEventEntity entity = FileEventEntityTestBuilder.file()
+                .id(id)
+                .xmppId(xmppId)
+                .filename(encryptedFilename)
+                .build();
+
+        FileConverter fileConverter= new FileConverter(cryptoService);
+        // When
+        final FileEvent file = fileConverter.fromEntity(entity);
+        // Then
+        assertThat(file.getId()).isEqualTo(id);
+        assertThat(file.getXmppId()).isEqualTo(xmppId);
+        assertThat(file.getUrl()).isEqualTo(url);
     }
 
 }

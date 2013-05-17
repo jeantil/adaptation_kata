@@ -19,6 +19,8 @@ public class AudioConverter extends GenericFileConverter<AudioEventEntity,AudioE
 
     @Override
     public AudioEvent fromEntity(AudioEventEntity entity) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        final AudioEvent audioEvent = super.fromEntity(new AudioEvent(), entity);
+        audioEvent.setDuration(entity.getDuration());
+        return audioEvent;
     }
 }

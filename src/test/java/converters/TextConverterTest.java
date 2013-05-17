@@ -1,10 +1,9 @@
 package converters;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
 import java.util.UUID;
 import org.junit.Test;
-import api.event.domain.TextEvent;
+import api.domain.TextEvent;
 import builders.model.TextEventModelTestBuilder;
 import builders.persistent.TextEventEntityTestBuilder;
 import builders.persistent.UserEntityTestBuilder;
@@ -41,10 +40,7 @@ public class TextConverterTest {
     @Test
     public void should_convert_entity_to_model() {
         UUID id = TimeUUIDUtils.getUniqueTimeUUIDinMillis();
-        Long userId = 12345L;
         String xmppId = "1654";
-
-        UserEntity userEntity = new UserEntityTestBuilder().userId(userId).build();
 
         TextEventEntity entity = TextEventEntityTestBuilder.text() //
                 .id(id)

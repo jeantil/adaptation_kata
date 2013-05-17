@@ -1,5 +1,6 @@
 package converters;
 
+import java.net.MalformedURLException;
 import api.domain.FileEvent;
 import persistent.FileEventEntity;
 import persistent.UserEntity;
@@ -18,5 +19,15 @@ abstract class GenericFileConverter<T extends FileEventEntity,U extends FileEven
         final T file = super.toEntity(event, model, user);
         file.setFilename(urlService.fromUrl(model.getUrl()));
         return file;
+    }
+
+    @Override
+    U fromEntity(U model, T entity) {
+        final U fileModel = super.fromEntity(model, entity);
+        try {
+            fileModel.setUrl(urlService.toUrl(entity.getFilename()));
+        } catch (MalformedURLException e) {
+        }
+        return fileModel;
     }
 }
