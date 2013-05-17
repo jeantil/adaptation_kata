@@ -9,6 +9,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
+import factory.EventEntityFactory;
+import persistent.EventEntity;
+import persistent.UserEntity;
 
 @XmlRootElement(name = "event")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -32,4 +35,6 @@ public abstract class Event {
     public void setId(UUID id) {
         this.id = id;
     }
+
+    public abstract <E, U> E accept(EventVisitor<E, U> visitor, U user);
 }
