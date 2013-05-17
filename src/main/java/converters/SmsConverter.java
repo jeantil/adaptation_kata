@@ -13,4 +13,12 @@ public class SmsConverter extends EventConverter<SmsEventEntity,SmsEvent> {
         return sms;
     }
 
+    @Override
+    public SmsEvent fromEntity(SmsEventEntity entity) {
+        final SmsEvent smsEvent = super.fromEntity(new SmsEvent(), entity);
+        smsEvent.setFrom(entity.getFrom());
+        smsEvent.setText(entity.getText());
+        return smsEvent;
+    }
+
 }

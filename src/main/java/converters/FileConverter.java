@@ -15,4 +15,9 @@ public class FileConverter extends GenericFileConverter<FileEventEntity,FileEven
     public FileEventEntity toEntity(FileEvent model, UserEntity user) {
         return super.toEntity(new FileEventEntity(), model,user);
     }
+
+    @Override
+    public FileEvent fromEntity(FileEventEntity entity) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

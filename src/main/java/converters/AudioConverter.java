@@ -16,4 +16,9 @@ public class AudioConverter extends GenericFileConverter<AudioEventEntity,AudioE
         audio.setDuration(model.getDuration());
         return audio;
     }
+
+    @Override
+    public AudioEvent fromEntity(AudioEventEntity entity) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }
