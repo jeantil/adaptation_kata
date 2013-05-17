@@ -43,7 +43,7 @@ public class EventModelFactoryTest {
                 .id(id)
                 .build();
 
-        SmsEvent built = factory.visit(entity);
+        SmsEvent built = factory.fromEntity(entity);
 
         assertThat(built.getId()).isEqualTo(id);
     }
@@ -61,7 +61,7 @@ public class EventModelFactoryTest {
         when(urlService.toUrl(filename)).thenReturn(url);
 
         //When
-        final AudioEvent built = factory.visit(entity);
+        final AudioEvent built = factory.fromEntity(entity);
 
         //Then
         verify(urlService).toUrl(filename);
@@ -82,7 +82,7 @@ public class EventModelFactoryTest {
         when(urlService.toUrl(filename)).thenReturn(url);
 
         //When
-        final FileEvent built= factory.visit(model);
+        final FileEvent built= factory.fromEntity(model);
 
         //Then
         verify(urlService).toUrl(filename);
@@ -98,7 +98,7 @@ public class EventModelFactoryTest {
                 .from(interlocutorMsisdn) //
                 .text(text).build();
 
-        SmsEvent built = factory.visit(entity);
+        SmsEvent built = factory.fromEntity(entity);
 
         assertThat(built.getFrom()).isEqualTo(interlocutorMsisdn);
         assertThat(built.getText()).isEqualTo(text);
@@ -113,7 +113,7 @@ public class EventModelFactoryTest {
                 .text("pouet") //
                 .build();
 
-        TextEvent built = factory.visit(entity);
+        TextEvent built = factory.fromEntity(entity);
 
         assertThat(built.getXmppId()).isEqualTo(xmppId);
         assertThat(built.getText()).isEqualTo(entity.getText());

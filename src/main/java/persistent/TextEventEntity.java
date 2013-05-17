@@ -27,6 +27,6 @@ public class TextEventEntity extends XmppEventEntity {
     @Override
     public TextEvent accept(EventModelFactory visitor) {
         //TODO we want to get rid of the cyclic dependency between the factory and the model
-        return visitor.visit(this);
+        return visitor.fromEntity(this);
     }
 }

@@ -64,8 +64,8 @@ public class EventDomainFactoryTest {
         TextEvent builtText = TextEventModelTestBuilder.text().build();
         FileEvent builtFile = FileEventModelTestBuilder.file().build();
 
-        when(modelFactory.visit(text)).thenReturn(builtText);
-        when(modelFactory.visit(file)).thenReturn(builtFile);
+        when(modelFactory.fromEntity(text)).thenReturn(builtText);
+        when(modelFactory.fromEntity(file)).thenReturn(builtFile);
 
         //TODO : We would like to be able to assign to the common parent
         //Collection<EventModelXmpp> builtList = factory.fromEntities(Arrays.asList(url, file));
@@ -80,7 +80,7 @@ public class EventDomainFactoryTest {
         FileEventEntity file = FileEventEntityTestBuilder.file().build();
         FileEvent built = FileEventModelTestBuilder.file().build();
 
-        when(modelFactory.visit(file)).thenReturn(built);
+        when(modelFactory.fromEntity(file)).thenReturn(built);
 
         Event model = factory.fromEntity(file);
 

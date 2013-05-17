@@ -26,6 +26,6 @@ public class AudioEventEntity extends FileEventEntity {
     @Override
     public FileEvent accept(EventModelFactory visitor) {
         //TODO we want to get rid of the cyclic dependency between the factory and the model
-        return visitor.visit(this);
+        return visitor.fromEntity(this);
     }
 }
