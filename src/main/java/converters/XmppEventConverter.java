@@ -12,4 +12,11 @@ abstract class XmppEventConverter<T extends XmppEventEntity, U extends XmppEvent
         eventEntity.setXmppId(model.getXmppId());
         return eventEntity;
     }
+
+    @Override
+    U fromEntity(U model, T entity) {
+        final U xmppModel = super.fromEntity(model, entity);
+        xmppModel.setXmppId(entity.getXmppId());
+        return xmppModel;
+    }
 }

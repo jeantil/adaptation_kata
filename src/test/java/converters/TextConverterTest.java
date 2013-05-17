@@ -1,9 +1,12 @@
 package converters;
 
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.entry;
 import java.util.UUID;
 import org.junit.Test;
+import api.event.domain.TextEvent;
 import builders.model.TextEventModelTestBuilder;
+import builders.persistent.TextEventEntityTestBuilder;
 import builders.persistent.UserEntityTestBuilder;
 import me.prettyprint.cassandra.utils.TimeUUIDUtils;
 import persistent.TextEventEntity;
@@ -33,5 +36,28 @@ public class TextConverterTest {
         assertThat(entity.getUserId()).isEqualTo(userId);
         assertThat(entity.getXmppId()).isEqualTo(xmppId);
         assertThat(entity.getText()).isEqualTo(model.getText());
+    }
+
+    @Test
+    public void should_convert_entity_to_model() {
+        UUID id = TimeUUIDUtils.getUniqueTimeUUIDinMillis();
+        Long userId = 12345L;
+        String xmppId = "1654";
+
+        UserEntity userEntity = new UserEntityTestBuilder().userId(userId).build();
+
+        TextEventEntity entity = TextEventEntityTestBuilder.text() //
+                .id(id)
+                .xmppId(xmppId) //
+                .text("pouet") //
+                .build();
+
+        TextConverter textConverter= new TextConverter();
+
+        final TextEvent model = textConverter.fromEntity(entity);
+
+        assertThat(model.getId()).isEqualTo(id);
+        assertThat(model.getXmppId()).isEqualTo(xmppId);
+        assertThat(model.getText()).isEqualTo(model.getText());
     }
 }

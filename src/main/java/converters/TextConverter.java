@@ -14,6 +14,8 @@ public class TextConverter extends XmppEventConverter<TextEventEntity,TextEvent>
 
     @Override
     public TextEvent fromEntity(TextEventEntity entity) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        final TextEvent textEvent = super.fromEntity(new TextEvent(), entity);
+        textEvent.setText(entity.getText());
+        return textEvent;
     }
 }
