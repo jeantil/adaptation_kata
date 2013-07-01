@@ -1,0 +1,24 @@
+package converters;
+
+import api.domain.FileEvent;
+import persistent.FileEventEntity;
+import persistent.UserEntity;
+import services.URLService;
+
+public class FileConverter extends GenericFileConverter<FileEventEntity,FileEvent> {
+
+    public FileConverter(URLService urlService) {
+        super(urlService);
+    }
+
+    @Override
+    public FileEventEntity toEntity(FileEvent model, UserEntity user) {
+        return super.toEntity(new FileEventEntity(), model,user);
+    }
+
+    @Override
+    public FileEvent fromEntity(FileEventEntity entity) {
+        return super.fromEntity(new FileEvent(), entity);
+
+    }
+}
