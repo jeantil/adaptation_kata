@@ -6,32 +6,38 @@ import org.springframework.stereotype.Service;
 import api.EventResource;
 import api.domain.Event;
 import api.domain.XmppEvent;
-import persistent.UserEntity;
+import factory.EventEntityFactory;
+import factory.EventModelFactory;
+import persistent.EventEntity;
+import persistent.XmppEventEntity;
 
 @Service
 public class EventVisitingResource implements EventResource {
 
     private Session session;
+    private EventStore store;
+
+    private EventEntityFactory entityFactory;
+    private EventModelFactory modelFactory;
 
     @Autowired
-    public EventVisitingResource(Session session) {
+    public EventVisitingResource(Session session,EventStore store, EventEntityFactory entityFactory, EventModelFactory modelFactory) {
         this.session = session;
+        this.store = store;
+        this.entityFactory = entityFactory;
+        this.modelFactory = modelFactory;
     }
 
-    @Override
     public Event post(Event event){
-        UserEntity user = session.getUser();
-        return null;
+        return modelFactory.fromEntity(store.persist(entityFactory.toEntity(event,session.getUser())));
     }
-
-    @Override
     public Event get(UUID id){
-        return null;
+        return modelFactory.fromEntity(store.findById(id, EventEntity.class));
     }
 
-    @Override
     public XmppEvent get(String xmppId){
-        return null;
+        return modelFactory.fromEntity(store.findByXmppId(xmppId, XmppEventEntity.class));
     }
+
 
 }
