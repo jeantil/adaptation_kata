@@ -3,6 +3,7 @@ package acceptance;
 import static org.fest.assertions.api.Assertions.assertThat;
 import java.io.IOException;
 import org.codehaus.jackson.JsonNode;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import support.Router;

@@ -29,4 +29,9 @@ public class SmsEvent extends Event {
     public void setFrom(String from) {
         this.from = from;
     }
+
+    @Override
+    public void accept(EventPersistingVisitor eventPersistingVisitor) {
+        eventPersistingVisitor.visit(this);
+    }
 }

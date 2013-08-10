@@ -21,4 +21,7 @@ public abstract class Event {
     public void setId(UUID id) {
         this.id = id;
     }
+
+
+    public abstract void accept(EventPersistingVisitor eventPersistingVisitor);
 }

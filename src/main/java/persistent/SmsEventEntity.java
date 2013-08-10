@@ -1,6 +1,7 @@
 package persistent;
 
 import org.codehaus.jackson.annotate.JsonTypeName;
+import api.domain.SmsEvent;
 
 @JsonTypeName(SmsEventEntity.EVENT_TYPE)
 public class SmsEventEntity extends EventEntity {
@@ -13,6 +14,12 @@ public class SmsEventEntity extends EventEntity {
 
     public SmsEventEntity() {
         super();
+    }
+
+    public SmsEventEntity(SmsEvent smsEvent, Long userId) {
+        super(smsEvent,userId);
+        from=smsEvent.getFrom();
+        text=smsEvent.getText();
     }
 
     public String getFrom() {
@@ -35,4 +42,10 @@ public class SmsEventEntity extends EventEntity {
     public EventType getType() {
         return EventType.sms;
     }
+
+    @Override
+    public SmsEvent accept(EventEntityVisitor eventEntityVisitor) {
+        return eventEntityVisitor.visit(this);
+    }
+
 }

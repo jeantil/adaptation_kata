@@ -17,4 +17,9 @@ public class FileEvent extends XmppEvent {
     public void setFilename(String filename) {
         this.filename = filename;
     }
+
+    @Override
+    public void accept(EventPersistingVisitor eventPersistingVisitor) {
+        eventPersistingVisitor.visit(this);
+    }
 }

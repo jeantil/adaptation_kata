@@ -1,11 +1,18 @@
 package persistent;
 
+import api.domain.XmppEvent;
+
 public abstract class XmppEventEntity extends EventEntity{
 
     private String xmppId;
 
     protected XmppEventEntity() {
         super();
+    }
+
+    public XmppEventEntity(XmppEvent xmppEvent, Long userId) {
+        super(xmppEvent,userId);
+        this.xmppId=xmppEvent.getXmppId();
     }
 
     public String getXmppId() {
@@ -20,4 +27,5 @@ public abstract class XmppEventEntity extends EventEntity{
     public EventType getType() {
         return EventType.sms;
     }
+    public abstract XmppEvent accept(EventEntityVisitor visitor);
 }

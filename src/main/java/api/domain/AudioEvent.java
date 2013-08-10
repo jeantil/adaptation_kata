@@ -16,4 +16,9 @@ public class AudioEvent extends FileEvent {
     public void setDuration(long duration) {
         this.duration = duration;
     }
+
+    @Override
+    public void accept(EventPersistingVisitor eventPersistingVisitor) {
+        eventPersistingVisitor.visit(this);
+    }
 }
