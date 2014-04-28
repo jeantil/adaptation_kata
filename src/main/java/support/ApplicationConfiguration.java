@@ -1,11 +1,14 @@
 package support;
 
 import java.util.Properties;
+
+import fr.xebia.extras.selma.Selma;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import services.EventMapper;
 
 @Configuration
 @ComponentScan({"api", "persistent", "services","support","factory", "converters"})
@@ -20,5 +23,10 @@ public class ApplicationConfiguration {
         properties.setProperty("store.path", "/tmp");
         propertySourcesPlaceholderConfigurer.setProperties(properties);
         return propertySourcesPlaceholderConfigurer;
+    }
+
+    @Bean
+    public EventMapper provideEventMapper(){
+        return Selma.getMapper(EventMapper.class);
     }
 }
