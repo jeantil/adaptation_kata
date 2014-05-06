@@ -16,8 +16,9 @@
  */
 package services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import persistent.support.CryptoHash;
-import support.ApplicationContextProvider;
 import support.CryptoService;
 
 import java.util.UUID;
@@ -25,22 +26,31 @@ import java.util.UUID;
 /**
  * Created by slemesle on 28/04/2014.
  */
+@Component
 public class UUIDMapper {
 
+    private final CryptoService cryptoService;
 
-    public UUID asUUID(UUID in){
+    public UUIDMapper(){
+        cryptoService = null;
+    }
 
-        return new UUID(in.getMostSignificantBits(),in.getLeastSignificantBits());
+    @Autowired
+    public UUIDMapper(CryptoService cryptoService) {
+        this.cryptoService = cryptoService;
+    }
+
+    public UUID asUUID(UUID in) {
+
+        return new UUID(in.getMostSignificantBits(), in.getLeastSignificantBits());
     }
 
 
-    public String asString(CryptoHash hash){
-        CryptoService cryptoService = ApplicationContextProvider.getCtx().getBean(CryptoService.class);
+    public String asString(CryptoHash hash) {
         return cryptoService.fromCryptoHash(hash);
     }
 
-    public CryptoHash asString(String hash){
-        CryptoService cryptoService = ApplicationContextProvider.getCtx().getBean(CryptoService.class);
+    public CryptoHash asString(String hash) {
         return cryptoService.toCryptoHash(hash);
     }
 

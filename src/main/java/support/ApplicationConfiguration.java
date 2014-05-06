@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import services.EventMapper;
+import services.UUIDMapper;
 
 @Configuration
 @ComponentScan({"api", "persistent", "services","support","factory", "converters"})
@@ -26,7 +27,7 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public EventMapper provideEventMapper(){
-        return Selma.getMapper(EventMapper.class);
+    public EventMapper provideEventMapper(UUIDMapper service){
+        return Selma.getMapperWithCustom(EventMapper.class, service);
     }
 }

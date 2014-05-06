@@ -12,7 +12,6 @@ import persistent.*;
 @Service
 public class EventVisitingResource implements EventResource {
 
-    private final EventMapper eventMapper;
     private final EntityToResourceMapper entityToResource;
     private Session session;
     private final EventStore store;
@@ -21,7 +20,6 @@ public class EventVisitingResource implements EventResource {
     public EventVisitingResource(Session session, EventStore store, EntityToResourceMapper entityToResource) {
         this.session = session;
         this.store = store;
-        this.eventMapper = Selma.getMapper(EventMapper.class);
         this.entityToResource = entityToResource;
     }
 

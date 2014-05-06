@@ -47,12 +47,12 @@
         <dependency>
             <groupId>fr.xebia.extras</groupId>
             <artifactId>selma</artifactId>
-            <version>0.4</version>
+            <version>0.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>fr.xebia.extras</groupId>
             <artifactId>selma-processor</artifactId>
-            <version>0.4</version>
+            <version>0.5-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 
